@@ -23,7 +23,7 @@ to ensure that only authorized users can access and perform certain actions on t
 To run the project, follow the link below:
 
 ``
-
+https://eedrisserh-basecamp.fly.dev/
 ``
 
 ## Usage
@@ -40,7 +40,7 @@ Remove attachment: Click on edit on project homepage and check the `remove attac
 Please note that certain actions, such as editing or deleting messages,
 may only be available to users with specific roles or permissions.
 ```
-./my_project argument1 argument2
+https://eedrisserh-basecamp.fly.dev/
 ```
 
 ### The Core Team
