@@ -37,27 +37,17 @@ class ProjectsController < ApplicationController
   def update
     if params[:project][:remove_attachment] == "1"
       @project.attachment.purge
+    elsif params[:project][:attachment].present?
+      @project.attachment.attach(params[:project][:attachment])
     end
-
-    if !@project.attachment.nil? && params[:project][:remove_attachment] == "0"
-      respond_to do |format|
-        if @project.update(update_params)
-          format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
-          format.json { render :show, status: :ok, location: @project }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @project.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      respond_to do |format|
-        if @project.update(project_params)
-          format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
-          format.json { render :show, status: :ok, location: @project }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @project.errors, status: :unprocessable_entity }
-        end
+  
+    respond_to do |format|
+      if @project.update(project_params.except(:attachment))
+        format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -98,7 +88,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:project_title, :project_content, :first_name, :attachment)
     end
     
-    def update_params
-      params.require(:project).permit(:project_title, :project_content, :first_name)
-    end
+    # def update_params
+    #   params.require(:project).permit(:project_title, :project_content, :first_name)
+    # end
 end
