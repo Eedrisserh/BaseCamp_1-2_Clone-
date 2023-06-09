@@ -87,8 +87,4 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:project_title, :project_content, :first_name, :attachment)
     end
-    
-    # def update_params
-    #   params.require(:project).permit(:project_title, :project_content, :first_name)
-    # end
 end
