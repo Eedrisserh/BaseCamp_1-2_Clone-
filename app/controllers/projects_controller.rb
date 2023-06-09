@@ -33,7 +33,6 @@ class ProjectsController < ApplicationController
     end
   end
   
-
   def update
     if params[:project][:remove_attachment] == "1"
       @project.attachment.purge

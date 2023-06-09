@@ -51,12 +51,16 @@ class UsersController < ApplicationController
         end
     end
       
-
     def destroy
+        #disassociating user
         @user = User.find(params[:id])
+        @user.projects.update_all(user_id: nil)
+        @user.messages.update_all(user_id: nil)
+        @user.replies.update_all(user_id: nil)
         @user.destroy
+      
         redirect_to users_path
-    end
+      end
 
     private
 
